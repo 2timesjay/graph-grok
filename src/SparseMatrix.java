@@ -271,6 +271,38 @@ public class SparseMatrix {
 		return shortestPaths;
 	}
 	
+	/*
+	 * Takes a set of sketch nodes, and returns an ArrayList<Integer>
+	 * such that arr.get(i) gives the index of the sketch node that
+	 * node i is closest too.
+	 * 
+	 * Need to work the return values a little bit. Make a proper data structure.
+	 */
+	public ArrayList<ArrayList<Integer>> distSketch(int len, Counter sketchNodes){
+		ArrayList<Integer> closestIndex = new ArrayList<Integer>();
+		for(int i = 0; i < len; i++) closestIndex.set(i, -1);
+		ArrayList<Double> closestDist = new ArrayList<Double>();
+		for(int i = 0; i < len; i++) closestDist.set(i, Double.MAX_VALUE);
+		ArrayList<ArrayList<Integer>> sketchReverseIndex = new ArrayList<ArrayList<Integer>>();
+		for(int index: sketchNodes.keySet()){
+			Counter distances = this.bfs(index);
+			for(int j = 0; j < len; j++){
+				double curDist = closestDist.get(j);
+				double dist = distances.getPath(index);
+				if(dist < curDist){
+					closestIndex.set(j, index);
+				}
+			}
+			sketchReverseIndex.add(new ArrayList<Integer>());
+		}
+		for(int j = 0; j< len; j++){
+			int closest = closestIndex.get(j);
+			sketchReverseIndex.get(closest).add(j);
+		}
+		//Return sketchReverseIndex, closestIndex forward index, and index correspondence bimap
+		return sketchReverseIndex;
+	}
+	
 	public SparseMatrix getRedundant(){
 		SparseMatrix redMat = new SparseMatrix(this).multiply(this);
 		int oldCard = 0;
