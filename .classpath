@@ -2,7 +2,5 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="/afs/cs.stanford.edu/u/jjensen/workspace/ParallelColt/parallelcolt-0.9.4.jar"/>
-	<classpathentry kind="lib" path="/afs/cs.stanford.edu/u/jjensen/workspace/guava-14.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
